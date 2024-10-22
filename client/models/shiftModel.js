@@ -5,10 +5,12 @@ const shiftSchema = new mongoose.Schema(
     date: Date,
     startingHour: Number,
     endingHour: Number,
-    employeeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-    },
+    employeeId: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Employee",
+      },
+    ],
   },
   { versionKey: false }
 );
