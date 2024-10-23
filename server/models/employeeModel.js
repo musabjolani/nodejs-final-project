@@ -10,7 +10,7 @@ const employeeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Departmen",
     },
-    shiftId: [{ type: Schema.Types.ObjectId, ref: "Shift" }],
+    shifts: [{ type: Schema.Types.ObjectId, ref: "Shift" }],
   },
   { versionKey: false }
 );
