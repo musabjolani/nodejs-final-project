@@ -7,6 +7,9 @@ const getAllEmployees = () => {
 const getEmployeeById = (id) => {
   return Employee.findById(id);
 };
+const getEmployeesByIds = (empIds) => {
+  return Employee.find({ _id: { $in: empIds } });
+};
 
 const getEmployeesInDepartment = (deptId) => {
   return Employee.find({ departmentId: deptId });
@@ -28,11 +31,20 @@ const deleteEmployee = async (id) => {
   return "Employee Updated ";
 };
 
+const deleteOldEmployeesFromShift = (shiftId, oldEmployeesToRemove) => {
+  Employee.updateMany(
+    { _id: { $in: oldEmployeesToRemove } },
+    { $pull: { shifts: shiftId } }
+  );
+};
+
 module.exports = {
   getAllEmployees,
   getEmployeeById,
   getEmployeesInDepartment,
+  getEmployeesByIds,
   addEmployee,
   updateEmployee,
   deleteEmployee,
+  deleteOldEmployeesFromShift,
 };

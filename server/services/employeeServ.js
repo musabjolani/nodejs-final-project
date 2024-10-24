@@ -1,4 +1,5 @@
 const employeeRep = require("../repositories/employeeRep");
+const shiftRep = require("../repositories/shiftRep");
 
 const getAllEmployees = () => {
   return employeeRep.getEmployeeById();
@@ -16,10 +17,29 @@ const addEmployee = async (emp) => {
   return employeeRep.addEmployee(emp);
 };
 
-const updateShiftsToEmployee = (id, shifts) => {
-  const emp = getEmployeeById(id);
-  emp.shifts = shifts;
-  return employeeRep.updateEmployee(id, emp);
+const assignShiftsToEmployee = ({ empId, shiftsId }) => {
+  const emp = employeeRep.getEmployeeById(empId);
+  const shifts = shiftRep.getShiftsByIds(shiftsId);
+
+  const oldShiftsToRemove = emp.shifts.filter((id) => {
+    !shiftsId.includes(id);
+  });
+
+  // Update the employee's shifts
+  emp.shifts = shiftsId;
+  employeeRep.updateEmployee(id, emp);
+
+  // Remove the employee from shifts that are no longer assigned
+  shiftRep.deleteOldShiftsFromEmployee(empId, oldShiftsToRemove);
+
+  // Add the employee to the new shifts if not already there
+
+  shifts.forEach((shift) => {
+    if (!shift.employees.includes(empId)) {
+      shift.employees.push(empId);
+      shiftRep.updateShift(shift.id, shift);
+    }
+  });
 };
 
 const updateEmployee = async (id, emp) => {
@@ -35,6 +55,6 @@ module.exports = {
   getEmployeesInDepartment,
   addEmployee,
   updateEmployee,
-  updateShiftsToEmployee,
+  assignShiftsToEmployee,
   deleteEmployee,
 };

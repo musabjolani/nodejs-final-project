@@ -5,7 +5,6 @@ const employeeSchema = new mongoose.Schema(
     firstName: String,
     lastName: String,
     startWorkYear: Number,
-    firstName: String,
     departmentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Departmen",
