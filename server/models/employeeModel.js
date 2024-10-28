@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const ObjectId = Schema.ObjectId;
 
 const employeeSchema = new mongoose.Schema(
   {
@@ -6,10 +8,10 @@ const employeeSchema = new mongoose.Schema(
     lastName: String,
     startWorkYear: Number,
     departmentId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "Departmen",
     },
-    shifts: [{ type: Schema.Types.ObjectId, ref: "Shift" }],
+    shifts: [{ type: String, ref: "Shift" }],
   },
   { versionKey: false }
 );

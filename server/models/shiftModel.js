@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const ObjectId = Schema.ObjectId;
 
 const shiftSchema = new mongoose.Schema(
   {
     date: Date,
-    startingHour: Number,
-    endingHour: Number,
+    startingHour: String,
+    endingHour: String,
     employees: [
       {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "Employee",
       },
     ],

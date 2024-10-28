@@ -11,8 +11,8 @@ const getEmployeesByIds = (empIds) => {
   return Employee.find({ _id: { $in: empIds } });
 };
 
-const getEmployeesInDepartment = (deptId) => {
-  return Employee.find({ departmentId: deptId });
+const getEmployeesInDepartment = async (deptId) => {
+  return await Employee.find({ departmentId: deptId });
 };
 
 const addEmployee = async (emp) => {
@@ -28,7 +28,7 @@ const updateEmployee = async (id, emp) => {
 
 const deleteEmployee = async (id) => {
   await Employee.findByIdAndDelete(id);
-  return "Employee Updated ";
+  return "Employee Deleted ";
 };
 
 const deleteOldEmployeesFromShift = (shiftId, oldEmployeesToRemove) => {

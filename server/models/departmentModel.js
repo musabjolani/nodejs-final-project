@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const ObjectId = Schema.ObjectId;
 
 const departmentSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    manager: { type: Schema.Types.ObjectId, ref: "Employee" },
+    manager: { type: String, ref: "Employee" },
   },
   { versionKey: false }
 );
