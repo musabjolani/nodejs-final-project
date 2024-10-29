@@ -5,7 +5,8 @@ const connectDB = require("../server/config/db");
 const employeeGraphQl = require("../server/graphQl/employeeGraphQl");
 const departmentGraphQl = require("../server/graphQl/departmentGraphQl");
 const shiftGraphQl = require("../server/graphQl/shiftGraphQl");
-
+const userRouter = require("../server/controllers/userController");
+const actionRouter = require("../server/controllers/actionController");
 const PORT = 3300;
 const app = express();
 
@@ -35,11 +36,13 @@ app.use(
   })
 );
 
+app.use("/", express.json());
+app.use("/user", userRouter);
+app.use("/action", actionRouter);
+
 connectDB();
 
 app.use(cors());
-
-app.use("/", express.json());
 
 app.listen(PORT, () => {
   console.log(`app is listening at http://localhost:${PORT}`);
