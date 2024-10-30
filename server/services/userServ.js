@@ -1,19 +1,31 @@
-const userRep = require("../repositories/userRep");
+const userRep = require("../repositories/users/userDBRep");
+const userRESTRep = require("../repositories/users/userWSRep");
 
-const getAllUsers = () => {
-  return userRep.getAllUsers();
+const getAllUsersFromDB = () => {
+  return userRep.getAllUsersFromDB();
 };
 
-const getUserById = (id) => {
-  return userRep.getUserById(id);
+const getUserByIdFromDB = (id) => {
+  return userRep.getUserByIdFromDB(id);
 };
 
-const addUser = async (user) => {
-  return userRep.addUser(user);
+const addUserToDB = async (user) => {
+  return userRep.addUserToDB(user);
+};
+
+const getAllUsersFromWS = async () => {
+  const { data } = await userRESTRep.getAllUsers();
+  return data;
+};
+
+const getUserAuthFromDB = (userName, email) => {
+  return userRep.getUserAuthFromDB(userName, email);
 };
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  addUser,
+  getAllUsersFromDB,
+  getUserByIdFromDB,
+  addUserToDB,
+  getAllUsersFromWS,
+  getUserAuthFromDB,
 };

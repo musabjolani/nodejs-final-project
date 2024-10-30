@@ -20,7 +20,7 @@ const updateDepartment = async (id, dept) => {
 
 const deleteDepartment = async (id) => {
   await Department.findByIdAndDelete(id);
-  return "Department Updated ";
+  return "Department Deleted ";
 };
 
 module.exports = {
