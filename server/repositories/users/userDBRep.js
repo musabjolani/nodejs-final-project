@@ -8,6 +8,9 @@ const getUserByIdFromDB = (id) => {
   return User.findById(id);
 };
 
+const getUserAuthFromDB = (userName, email) => {
+  return User.findOne({ userName: userName, email: email });
+};
 const addUserToDB = async (user) => {
   const newUser = new User(user);
   await newUser.save();
@@ -18,4 +21,5 @@ module.exports = {
   getAllUsersFromDB,
   getUserByIdFromDB,
   addUserToDB,
+  getUserAuthFromDB,
 };

@@ -18,9 +18,14 @@ const getAllUsersFromWS = async () => {
   return data;
 };
 
+const getUserAuthFromDB = (userName, email) => {
+  return userRep.getUserAuthFromDB(userName, email);
+};
+
 module.exports = {
   getAllUsersFromDB,
   getUserByIdFromDB,
   addUserToDB,
   getAllUsersFromWS,
+  getUserAuthFromDB,
 };

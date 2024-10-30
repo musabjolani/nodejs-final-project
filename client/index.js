@@ -7,6 +7,8 @@ const departmentGraphQl = require("../server/graphQl/departmentGraphQl");
 const shiftGraphQl = require("../server/graphQl/shiftGraphQl");
 const userRouter = require("../server/controllers/userController");
 const actionRouter = require("../server/controllers/actionController");
+const authRouter = require("../server/controllers/authController");
+
 const PORT = 3300;
 const app = express();
 
@@ -39,6 +41,7 @@ app.use(
 app.use("/", express.json());
 app.use("/user", userRouter);
 app.use("/action", actionRouter);
+app.use("/login", authRouter);
 
 connectDB();
 
